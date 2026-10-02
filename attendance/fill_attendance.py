@@ -42,8 +42,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))   # shared helpe
 import openpyxl
 from openpyxl.styles import Font
 
-from semis_common import (SKIP_SHEETS, add_common_args, ask, code_of, dmy, iso, prepare, sheet,
-                          std_num)
+from semis_common import (SKIP_SHEETS, add_common_args, ask, code_of, dmy, explain_no_template, iso,
+                          list_workbooks, prepare, sheet, std_num)
 
 PRESENT, ABSENT, NON_SCHOOL = "present", "absent", "Non School Day"
 MONTHS = {m: i for i, m in enumerate(
@@ -202,10 +202,14 @@ def plan_records(records, cal, school_days, ref, adjustments, issues):
 @dataclass
 class Template:
     path: Path
-    code: str
+    code: str            # academic year code from the file, "" when the template has no year column
     standard: str
     stream: str
     school: str
+    ids: set             # last 4 digits of every LIN in the template
+    first: dt.date       # first and last date column
+    last: dt.date
+    days: set            # dates that are blank in the first learner row (= school days)
 
 
 def month_sheets(wb):
@@ -213,41 +217,124 @@ def month_sheets(wb):
 
 
 def peek_template(path):
+    """Read standard / year / stream / learners / dates. Raises ValueError with the reason.
+
+    Columns are found by header name: templates downloaded with different options have a different layout.
+    """
+    wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
     try:
-        wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
         sheets = [n for n in wb.sheetnames if n not in SKIP_SHEETS]
-        row = next(wb[sheets[0]].iter_rows(min_row=4, max_row=4, values_only=True))
+        if not sheets:
+            raise ValueError("no data sheet (this does not look like an attendance template)")
+        rows = list(wb[sheets[0]].iter_rows(min_row=2, values_only=True))
+        dates, days = set(), set()
+        for n in sheets:
+            top = list(wb[n].iter_rows(min_row=2, max_row=4, values_only=True))
+            for i, h in enumerate(top[0] if top else ()):
+                if isinstance(h, str) and DATE_HEADER.match(h.strip()):
+                    d = iso(h.strip())
+                    dates.add(d)
+                    if len(top) >= 3 and (i >= len(top[2]) or top[2][i] != NON_SCHOOL):
+                        days.add(d)
+    finally:
         wb.close()
-        return Template(Path(path), str(row[3]), str(row[4]), str(row[5]), str(row[1]))
-    except Exception:
-        return None
+    if not dates:
+        raise ValueError("no date columns in row 2 (this does not look like an attendance template)")
+    head = [str(h or "").strip().lower() for h in rows[0]]
+    if "lin" not in head:
+        raise ValueError("no LIN column in row 2")
+    i_lin, i_std = head.index("lin"), head.index("grade") if "grade" in head else None
+    if i_std is None:
+        raise ValueError("no Grade column in row 2")
+
+    def col(name):
+        return head.index(name) if name in head else None
+
+    def cell(row, i):
+        return str(row[i]).strip() if i is not None and i < len(row) and row[i] is not None else ""
+    learners = [r for r in rows[2:] if len(r) > i_lin and r[i_lin]]
+    if not learners:
+        raise ValueError("no learner rows found (was the class empty when it was downloaded?)")
+    year = re.search(r"\d{4}", cell(learners[0], col("academic year_package")))
+    return Template(Path(path), year.group() if year else "", cell(learners[0], i_std),
+                    cell(learners[0], col("stream")), cell(learners[0], col("school")),
+                    {str(r[i_lin])[-4:] for r in learners}, min(dates), max(dates), days)
 
 
-def find_templates(folder, out_dir):
+def find_templates(folder, out_root):
+    """(templates, skipped) for every attendance template in the folder."""
+    cands, skipped = list_workbooks(folder, out_root)
     found = []
-    for p in sorted(Path(folder).glob("*.xlsx")):
-        if (p.name.startswith("~$") or "Learners Attendance" not in p.name
-                or p.stem.endswith("- filled") or out_dir in p.parents):
-            continue
-        t = peek_template(p)
-        if t:
-            found.append(t)
-    return found
+    for p in cands:
+        try:
+            found.append(peek_template(p))
+        except Exception as e:
+            skipped.append((p.name, str(e) or type(e).__name__))
+    return found, skipped
+
+
+def best_job(tpl, all_jobs, calendars):
+    """The standard/year job a template belongs to, or None.
+
+    With a year column the year is known. Without one it is read from the template's school days, and when
+    the template has none (wrong dates at download) from the learners it contains.
+    """
+    m = re.search(r"\d+", tpl.standard)
+    cands = [j for j in all_jobs if m and j.std == int(m.group())]
+    if tpl.code:
+        cands = [j for j in cands if j.code == tpl.code]
+    elif tpl.days:
+        cands = [j for j in cands if tpl.days & set(calendars[j.code].school_days())]
+    if len(cands) > 1:
+        cands.sort(key=lambda j: (len(set(j.learners) & tpl.ids) / len(j.learners),
+                                  len(set(j.learners) & tpl.ids)), reverse=True)
+    return cands[0] if cands else None
+
+
+def describe(t):
+    return (f"{t.path.name}: {t.standard} {t.stream}, "
+            f"{'academic year ' + t.code if t.code else 'no year column'}, dates {dmy(t.first)} to {dmy(t.last)}, "
+            f"{len(t.days)} school day(s), {len(t.ids)} learners")
+
+
+def lookup(job, all_jobs, calendars, args, out_root):
+    found, skipped = find_templates(args.templates, out_root)
+    return [t for t in found if best_job(t, all_jobs, calendars) is job], found, skipped
 
 
 def template_days(wb):
-    """Dates whose cell is empty (= school day) in the first learner row, plus date->column maps."""
+    """Dates that are not marked 'Non School Day' in the first learner row (= school days; they may already
+    hold present/absent from an earlier upload), plus date->column maps."""
     days, cols = set(), {}
     for ws in month_sheets(wb):
         cols[ws.title] = {c.column: iso(c.value) for c in ws[2]
                           if isinstance(c.value, str) and DATE_HEADER.match(c.value)}
         for col, d in cols[ws.title].items():
-            if ws.cell(4, col).value in (None, ""):
+            if ws.cell(4, col).value != NON_SCHOOL:
                 days.add(d)
     return days, cols
 
 
+def refusal(tpl, job, cal, records):
+    """Why a template cannot be filled for this job, or "" when it can."""
+    if not tpl.days & set(cal.school_days()):
+        span = f"{dmy(tpl.first)} to {dmy(tpl.last)}"
+        if not tpl.days:
+            why = f"every date in it ({span}) is marked 'Non School Day', so there is nothing to fill"
+        else:
+            why = f"its school days ({span}) are outside {job.label}"
+        return (f"{why}. Download it again for {job.standard} with Starting date {dmy(cal.opens)} "
+                f"and Closing date {dmy(cal.closes)}.")
+    if not tpl.ids & {r.id for r in records}:
+        return (f"none of its {len(tpl.ids)} learners are in the selected tester data "
+                "(probably another tester's class: select that tester, or use --tester all)")
+    return ""
+
+
 def fill_template(tpl, job, cal, records, classes, out_dir, adjustments, issues):
+    why = refusal(tpl, job, cal, records)
+    if why:
+        return None, why
     wb = openpyxl.load_workbook(tpl.path)
     days, cols = template_days(wb)
     cal_days = set(cal.school_days())
@@ -256,9 +343,7 @@ def fill_template(tpl, job, cal, records, classes, out_dir, adjustments, issues)
         issues.append(("", "", job.label, "", f"Template school days differ from the calendar on "
                        f"{len(diff)} date(s), e.g. {', '.join(dmy(d) for d in diff[:5])}. "
                        "The template was followed."))
-    first = month_sheets(wb)[0]
-    in_tpl = {str(first.cell(r, 7).value)[-4:] for r in range(4, first.max_row + 1)
-              if first.cell(r, 7).value}
+    in_tpl = tpl.ids
     mine = [r for r in records if r.id in in_tpl]
     owners = defaultdict(set)
     for r in mine:
@@ -275,8 +360,9 @@ def fill_template(tpl, job, cal, records, classes, out_dir, adjustments, issues)
                        f"{job.label} attendance in the selected tester data (left blank; may belong to another tester)"))
     stats = Counter()
     for ws in month_sheets(wb):
+        lin_col = next((c.column for c in ws[2] if str(c.value or '').strip().lower() == 'lin'), 7)
         for r in range(4, ws.max_row + 1):
-            lin = ws.cell(r, 7).value
+            lin = ws.cell(r, lin_col).value
             segs = segments.get(str(lin)[-4:]) if lin else None
             if not segs:
                 continue
@@ -287,12 +373,16 @@ def fill_template(tpl, job, cal, records, classes, out_dir, adjustments, issues)
                 seg = next((s for s in segs if s.start <= d <= s.end), None)
                 if seg is None:
                     continue
-                cell.value = ABSENT if d in seg.absent else PRESENT
-                stats[cell.value] += 1
+                new = ABSENT if d in seg.absent else PRESENT
+                if cell.value in (PRESENT, ABSENT):
+                    stats['existing'] += 1
+                    stats['changed'] += cell.value != new
+                cell.value = new
+                stats[new] += 1
     other_school, other_class = defaultdict(set), {}
     for lid, segs in segments.items():
         for s in segs:
-            if tpl.school.lower().find(s.rec.school.lower()) < 0:
+            if tpl.school and tpl.school.lower().find(s.rec.school.lower()) < 0:
                 other_school[(lid, s.rec.name, s.rec.school)].add(s.rec.term)
             cls = classes.get((s.rec.tester, lid, s.rec.label))
             if cls and cls != tpl.stream:
@@ -307,6 +397,9 @@ def fill_template(tpl, job, cal, records, classes, out_dir, adjustments, issues)
     late_days = sum(len([d for d in s.rec.late_on if s.start <= d <= s.end])
                     for ss in segments.values() for s in ss)
     stats["late_as_present"] = late_days
+    if stats["existing"]:
+        issues.append(("", "", job.label, "", f"{tpl.path.name} already held attendance in "
+                       f"{stats['existing']} cell(s); they were overwritten ({stats['changed']} with a different value)"))
     stats["learners"] = len(segments)
     out = out_dir / f"{tpl.path.stem} - filled.xlsx"
     wb.save(out)
@@ -371,7 +464,8 @@ def show_job(job, cal):
     print("=" * 72)
 
 
-def process_job(job, cal, args, classes, all_records, out_dir, out_root):
+def process_job(job, all_jobs, calendars, args, classes, all_records, out_dir, out_root):
+    cal = calendars[job.code]
     adjustments, issues, lines = [], [], []
     lines += [f"Attendance report: {job.standard} of {job.code} ({job.label})",
               f"Testers: {', '.join(f'Tester {t}' for t in sorted({r.tester for r in job.records}))}", "",
@@ -379,14 +473,14 @@ def process_job(job, cal, args, classes, all_records, out_dir, out_root):
               f"public holidays and weekends are non-school days."]
     templates = []
     if not args.report_only:
-        templates = [t for t in find_templates(args.templates, out_root)
-                     if t.code == job.code and t.standard == job.standard]
-        if not templates and not args.yes:
-            print(f"\n No {job.standard} / {job.code} template found in {args.templates}")
-            ans = ask(" Download it, save it there, then press Enter (or type s to skip): ", "")
-            if ans != "s":
-                templates = [t for t in find_templates(args.templates, out_root)
-                             if t.code == job.code and t.standard == job.standard]
+        templates, found, skipped = lookup(job, all_jobs, calendars, args, out_root)
+        if not templates:
+            explain_no_template(args.templates, f"{job.standard} / {job.code}",
+                                [describe(t) for t in found], skipped)
+            if not args.yes:
+                ans = ask(" Save the right template there, then press Enter (or type s to skip): ", "")
+                if ans != "s":
+                    templates = lookup(job, all_jobs, calendars, args, out_root)[0]
         if not templates:
             print(" Skipped: no template available.")
             return
@@ -396,10 +490,16 @@ def process_job(job, cal, args, classes, all_records, out_dir, out_root):
         lines.append("Mode: report only (school days taken from the calendar, no template filled).")
     for tpl in templates:
         out, st = fill_template(tpl, job, cal, job.records, classes, out_dir, adjustments, issues)
+        if out is None:
+            lines += ["", f"Template: {tpl.path.name}  ->  NOT FILLED: {st}"]
+            print(f" NOT filled {tpl.path.name}: {st}")
+            continue
         lines += ["", f"Template: {tpl.path.name}  ->  {out.name}",
                   f"  Learners filled : {st['learners']}",
                   f"  Cells present   : {st[PRESENT]}",
                   f"  Cells absent    : {st[ABSENT]}",
+                  *([f"  Cells that already held attendance: {st['existing']} (changed: {st['changed']})"]
+                    if st['existing'] else []),
                   f"  Late days recorded as present (SEMIS has no 'late'): {st['late_as_present']}"]
         print(f" Filled {tpl.path.name}: {st['learners']} learners, {st[PRESENT]} present, "
               f"{st[ABSENT]} absent -> {out.name}")
@@ -420,7 +520,8 @@ def main():
         recs, cls = load_records(available[n], n)
         records += recs
         classes.update(cls)
-    jobs = [j for j in build_jobs(records) if j.std >= args.start_standard]
+    all_jobs = build_jobs(records)
+    jobs = [j for j in all_jobs if j.std >= args.start_standard]
     missing = sorted({j.code for j in jobs} - set(calendars))
     if missing:
         sys.exit(f"Calendar has no academic year for code(s): {', '.join(missing)}")
@@ -428,7 +529,7 @@ def main():
     for i, job in enumerate(jobs):
         cal = calendars[job.code]
         show_job(job, cal)
-        process_job(job, cal, args, classes, records, out_dir, out_root)
+        process_job(job, all_jobs, calendars, args, classes, records, out_dir, out_root)
         if i + 1 < len(jobs):
             nxt = jobs[i + 1]
             if not args.yes and not args.report_only and ask(

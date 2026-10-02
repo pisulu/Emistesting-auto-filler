@@ -12,6 +12,15 @@ Downloaded attendance templates go in `attendance/templates/`; results are writt
 Only the Standard 1 template is included as an example: for other standards press Enter after saving the
 downloaded template, or type `s` to skip. `--report-only` shows the change reports for every standard without templates.
 
+## Template layout
+
+The current SEMIS download has the columns `Ref, Grade, Stream, LIN, First name, Surname, Gender` followed by one
+column per date. It has **no academic-year column**, so the script works out the year from the template's school
+days: **download with the exact Starting and Closing dates the script shows**, otherwise every cell comes out as
+`Non School Day` (or the dates fall in another year) and the script will refuse the file and tell you what to
+re-download. Columns are located by their header names, so the older layout (with `School`,
+`Enrollment_Date` and `Academic Year_Package` columns) is still read correctly.
+
 ## Extra option
 
 | Option | Meaning |

@@ -43,7 +43,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))   # shared helpe
 import openpyxl
 from openpyxl.styles import Font
 
-from semis_common import (SKIP_SHEETS, add_common_args, ask, code_of, dmy, prepare, sheet, std_num)
+from semis_common import (SKIP_SHEETS, add_common_args, ask, code_of, dmy, explain_no_template,
+                          list_workbooks, prepare, sheet, std_num)
 
 # SEMIS subject -> test-data subjects to take the score from (first one that has a score wins).
 # Edit here or pass --subject-map <json file> with the same shape.
@@ -169,32 +170,44 @@ def data_sheet(wb):
 
 
 def peek_template(path):
+    """Read standard / stream / learners from the sheet. Raises ValueError with the reason."""
+    wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
     try:
-        wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
-        ws = data_sheet(wb)
-        rows = [r for r in ws.iter_rows(min_row=4, max_col=4, values_only=True) if r and r[3]]
+        sheets = [n for n in wb.sheetnames if n not in SKIP_SHEETS]
+        if not sheets:
+            raise ValueError("no data sheet (this does not look like a performance template)")
+        rows = list(wb[sheets[0]].iter_rows(min_row=1, values_only=True))
+    finally:
         wb.close()
-        return Template(Path(path), str(rows[0][1]), str(rows[0][2]),
-                        {str(r[3])[-4:] for r in rows}, year_hint(Path(path).name))
-    except Exception:
-        return None
+    if not any(re.fullmatch(r"Term\s*\d", str(c or "").strip(), re.I) for c in (rows[0] if rows else ())):
+        raise ValueError("no 'Term 1/2/3' headings in row 1 (this does not look like a performance template)")
+    head = [str(h or "").strip().lower() for h in rows[1]] if len(rows) > 1 else []
+    i_std = head.index("grade") if "grade" in head else 1
+    i_stream = head.index("stream") if "stream" in head else 2
+    i_lin = head.index("lin") if "lin" in head else 3
+    learners = [r for r in rows[3:] if len(r) > i_lin and r[i_lin]]
+    if not learners:
+        raise ValueError("no learner rows found")
+    return Template(Path(path), str(learners[0][i_std]).strip(), str(learners[0][i_stream]).strip(),
+                    {str(r[i_lin])[-4:] for r in learners}, year_hint(Path(path).name))
 
 
 def find_templates(folder, out_root):
+    """(templates, skipped) for every performance template in the folder."""
+    cands, skipped = list_workbooks(folder, out_root)
     found = []
-    for p in sorted(Path(folder).glob("*.xlsx")):
-        if (p.name.startswith("~$") or "Learners Performance" not in p.name
-                or p.stem.endswith("- filled") or out_root in p.parents):
-            continue
-        t = peek_template(p)
-        if t:
-            found.append(t)
-    return found
+    for p in cands:
+        try:
+            found.append(peek_template(p))
+        except Exception as e:
+            skipped.append((p.name, str(e) or type(e).__name__))
+    return found, skipped
 
 
 def best_job(tpl, jobs):
     """Which standard/year a downloaded template belongs to, and how that was decided."""
-    cands = [j for j in jobs if j.standard == tpl.standard]
+    tstd = re.search(r"\d+", tpl.standard)
+    cands = [j for j in jobs if tstd and j.std == int(tstd.group())]
     if not cands:
         return None, ""
     if tpl.hint:
@@ -253,19 +266,22 @@ def pick_score(rec, semis_subject, subject_map):
 
 
 def fill_template(tpl, job, records, subject_map, out_dir, scores_rows, remark_rows, issues):
+    if not tpl.ids & {r.id for r in records}:
+        return None, (f"none of its {len(tpl.ids)} learners are in the selected tester data "
+                      "(probably another tester's class: select that tester, or use --tester all)")
     wb = openpyxl.load_workbook(tpl.path)
     ws = data_sheet(wb)
     lay = read_layout(ws)
     if not lay.score:
-        issues.append(("", "", job.label, "", f"{tpl.path.name}: no term/subject columns found; skipped"))
-        return None, Counter()
+        return None, "no term/subject columns found"
+    lin_col = next((c.column for c in ws[2] if str(c.value or "").strip().lower() == "lin"), 4)
     by_key = defaultdict(list)
     for r in records:
         by_key[(r.id, r.term)].append(r)
     stats, unmapped, blank_subject = Counter(), Counter(), Counter()
     seen_ids = set()
     for row in range(4, ws.max_row + 1):
-        lin = ws.cell(row, 4).value
+        lin = ws.cell(row, lin_col).value
         if not lin:
             continue
         lid = str(lin)[-4:]
@@ -368,18 +384,21 @@ def show_job(job, cal):
 
 def process_job(job, all_jobs, cal, args, subject_map, out_dir, out_root):
     def mine():
+        found, skipped = find_templates(args.templates, out_root)
         out = []
-        for t in find_templates(args.templates, out_root):
+        for t in found:
             j, how = best_job(t, all_jobs)
             if j is job:
                 out.append((t, how))
-        return out
+        return out, found, skipped
 
-    templates = mine()
-    if not templates and not args.yes:
-        print(f"\n No {job.standard} / {job.code} template found in {args.templates}")
-        if ask(" Download it, save it there, then press Enter (or type s to skip): ", "") != "s":
-            templates = mine()
+    templates, found, skipped = mine()
+    if not templates:
+        explain_no_template(args.templates, f"{job.standard} / {job.code}", [
+            f"{t.path.name}: {t.standard} {t.stream}" + (f", year {t.hint} in the name" if t.hint else "")
+            for t in found], skipped)
+        if not args.yes and ask(" Save the right template there, then press Enter (or type s to skip): ", "") != "s":
+            templates = mine()[0]
     if not templates:
         print(" Skipped: no template available.")
         return
@@ -391,6 +410,8 @@ def process_job(job, all_jobs, cal, args, subject_map, out_dir, out_root):
     for tpl, how in templates:
         out, st = fill_template(tpl, job, job.records, subject_map, out_dir, scores_rows, remark_rows, issues)
         if out is None:
+            summary += ["", f"Template: {tpl.path.name}  ->  NOT FILLED: {st}"]
+            print(f" NOT filled {tpl.path.name}: {st}")
             continue
         covered |= tpl.ids
         summary += ["", f"Template: {tpl.path.name}  ->  {out.name}",

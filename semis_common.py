@@ -187,3 +187,35 @@ def sheet(wb, title, header, rows, widths=None):
         ws.column_dimensions[get_column_letter(i)].width = min(w + 2, (widths or {}).get(i, 70))
     ws.freeze_panes = "A2"
     return ws
+
+
+# --------------------------------------------------------------------------- template lookup
+def list_workbooks(folder, out_root):
+    """(candidates, skipped): .xlsx files worth inspecting, and (name, reason) for the ones ignored."""
+    cands, skipped = [], []
+    folder = Path(folder)
+    if not folder.is_dir():
+        return cands, [(str(folder), "folder does not exist")]
+    for p in sorted(folder.glob("*.xlsx")):
+        if p.name.startswith("~$"):
+            skipped.append((p.name, "Excel temporary/lock file (close the file in Excel)"))
+        elif p.stem.endswith("- filled"):
+            skipped.append((p.name, "a filled copy made by this script"))
+        elif Path(out_root) in p.parents:
+            continue
+        else:
+            cands.append(p)
+    return cands, skipped
+
+
+def explain_no_template(folder, wanted, found, skipped):
+    """Say what was looked for, where, and what each file in the folder turned out to be."""
+    print(f"\n No template found for {wanted}.")
+    print(f" Looked in: {Path(folder).resolve()}")
+    if not found and not skipped:
+        print(" That folder has no .xlsx files. Save the downloaded template there (or use --templates <folder>).")
+        return
+    for line in found:
+        print(f"   - {line}")
+    for name, reason in skipped:
+        print(f"   - {name}: ignored, {reason}")
