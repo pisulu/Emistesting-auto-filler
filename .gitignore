@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+~$*
+
+# Real data is kept out of the repo root. Run the script from your own data folder,
+# or keep it here locally; only usage-example/ is tracked.
+/output/
+/SEMIS_Test_Tester_*.xlsx
+/SEMIS - Learners Attendance*.xlsx
+/calendar*.json

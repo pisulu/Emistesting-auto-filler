@@ -1,0 +1,1640 @@
+{
+  "academicYear": "iDSrFrrVgmX",
+  "defaults": {
+    "academicYear": "2027"
+  },
+  "schoolCalendar": [
+    {
+      "academicYear": {
+        "code": "2027",
+        "description": "2026/27 Academic year",
+        "endDate": "2027-07-16",
+        "label": "2026-2027",
+        "startDate": "2026-09-14"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2026-12-18",
+          "key": "term1",
+          "startDate": "2026-09-14"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2027-03-25",
+          "key": "term2",
+          "startDate": "2027-01-04"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2027-07-16",
+          "key": "term3",
+          "startDate": "2027-04-12"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2027-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-04-03",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-04-06",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2027-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "FEWHDoH04qK",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2026",
+        "description": "2025/26 Academic year",
+        "endDate": "2026-07-31",
+        "label": "2025-2026",
+        "startDate": "2025-09-14"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2025-12-19",
+          "key": "term1",
+          "startDate": "2025-09-15"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2026-03-27",
+          "key": "term2",
+          "startDate": "2026-01-05"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2026-07-24",
+          "key": "term3",
+          "startDate": "2026-04-20"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2026-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-04-03",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-04-06",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2026-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "r5fdz0E8wk9",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2025",
+        "description": "2024/25 Academic year",
+        "endDate": "2025-07-18",
+        "label": "2024-2025",
+        "startDate": "2024-09-09"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2024-12-20",
+          "key": "term1",
+          "startDate": "2024-09-09"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2025-03-28",
+          "key": "term2",
+          "startDate": "2025-01-13"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2025-07-18",
+          "key": "term3",
+          "startDate": "2025-04-21"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2024-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2025-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2025-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2025-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2025-04-18",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2025-04-21",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2025-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2025-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2025-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "fGBV50u7scB",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2024",
+        "description": "2023/24 Academic year",
+        "endDate": "2024-07-19",
+        "label": "2023-2024",
+        "startDate": "2023-09-11"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2023-12-15",
+          "key": "term1",
+          "startDate": "2023-09-11"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2024-03-29",
+          "key": "term2",
+          "startDate": "2024-01-08"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2024-07-19",
+          "key": "term3",
+          "startDate": "2024-04-15"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2023-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-03-29",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-04-01",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2024-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "v9THWlDtMvb",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2023",
+        "description": "2022/23 Academic year",
+        "endDate": "2023-07-21",
+        "label": "2022-2023",
+        "startDate": "2022-09-12"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2022-12-16",
+          "key": "term1",
+          "startDate": "2022-09-12"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2023-03-31",
+          "key": "term2",
+          "startDate": "2023-01-09"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2023-07-21",
+          "key": "term3",
+          "startDate": "2023-04-17"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2022-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-04-07",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-04-10",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2023-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "B1GMqFAQ8Tv",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2022",
+        "description": "2021/22 Academic year",
+        "endDate": "2022-07-22",
+        "label": "2021-2022",
+        "startDate": "2021-09-13"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2021-12-17",
+          "key": "term1",
+          "startDate": "2021-09-13"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2022-03-25",
+          "key": "term2",
+          "startDate": "2022-01-10"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2022-07-22",
+          "key": "term3",
+          "startDate": "2022-04-18"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2021-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-04-15",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-04-18",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2022-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "A1B2C3D4E5x",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2021",
+        "description": "2020/21 Academic year",
+        "endDate": "2021-07-23",
+        "label": "2020-2021",
+        "startDate": "2020-09-14"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2020-12-18",
+          "key": "term1",
+          "startDate": "2020-09-14"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2021-03-26",
+          "key": "term2",
+          "startDate": "2021-01-11"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2021-07-23",
+          "key": "term3",
+          "startDate": "2021-04-19"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2020-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-04-02",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-04-05",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2021-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "F6G7H8I9J0y",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2020",
+        "description": "2019/20 Academic year",
+        "endDate": "2020-07-17",
+        "label": "2019-2020",
+        "startDate": "2019-09-09"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2019-12-20",
+          "key": "term1",
+          "startDate": "2019-09-09"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2020-03-27",
+          "key": "term2",
+          "startDate": "2020-01-13"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2020-07-17",
+          "key": "term3",
+          "startDate": "2020-04-13"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2019-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-04-10",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-04-13",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2020-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "K1L2M3N4O5z",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2019",
+        "description": "2018/19 Academic year",
+        "endDate": "2019-07-19",
+        "label": "2018-2019",
+        "startDate": "2018-09-10"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2018-12-21",
+          "key": "term1",
+          "startDate": "2018-09-10"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2019-03-29",
+          "key": "term2",
+          "startDate": "2019-01-14"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2019-07-19",
+          "key": "term3",
+          "startDate": "2019-04-15"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2018-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-04-19",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-04-22",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2019-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "P6Q7R8S9T0a",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2018",
+        "description": "2017/18 Academic year",
+        "endDate": "2018-07-20",
+        "label": "2017-2018",
+        "startDate": "2017-09-11"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2017-12-22",
+          "key": "term1",
+          "startDate": "2017-09-11"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2018-03-23",
+          "key": "term2",
+          "startDate": "2018-01-08"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2018-07-20",
+          "key": "term3",
+          "startDate": "2018-04-09"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2017-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-03-30",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-04-02",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2018-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "U1V2W3X4Y5b",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2017",
+        "description": "2016/17 Academic year",
+        "endDate": "2017-07-21",
+        "label": "2016-2017",
+        "startDate": "2016-09-12"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2016-12-16",
+          "key": "term1",
+          "startDate": "2016-09-12"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2017-03-31",
+          "key": "term2",
+          "startDate": "2017-01-09"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2017-07-21",
+          "key": "term3",
+          "startDate": "2017-04-17"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2016-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-04-14",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-04-17",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2017-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "Z6A7B8C9D0c",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2016",
+        "description": "2015/16 Academic year",
+        "endDate": "2016-07-22",
+        "label": "2015-2016",
+        "startDate": "2015-09-14"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2015-12-18",
+          "key": "term1",
+          "startDate": "2015-09-14"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2016-03-25",
+          "key": "term2",
+          "startDate": "2016-01-11"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2016-07-22",
+          "key": "term3",
+          "startDate": "2016-04-11"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2015-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-03-25",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-03-28",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2016-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "E1F2G3H4I5d",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2015",
+        "description": "2014/15 Academic year",
+        "endDate": "2015-07-17",
+        "label": "2014-2015",
+        "startDate": "2014-09-08"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2014-12-19",
+          "key": "term1",
+          "startDate": "2014-09-08"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2015-03-27",
+          "key": "term2",
+          "startDate": "2015-01-12"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2015-07-17",
+          "key": "term3",
+          "startDate": "2015-04-13"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2014-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-04-03",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-04-06",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2015-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "J6K7L8M9N0e",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2014",
+        "description": "2013/14 Academic year",
+        "endDate": "2014-07-18",
+        "label": "2013-2014",
+        "startDate": "2013-09-09"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2013-12-20",
+          "key": "term1",
+          "startDate": "2013-09-09"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2014-04-04",
+          "key": "term2",
+          "startDate": "2014-01-13"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2014-07-18",
+          "key": "term3",
+          "startDate": "2014-04-21"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2013-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-04-18",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-04-21",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2014-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "O1P2Q3R4S5f",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2013",
+        "description": "2012/13 Academic year",
+        "endDate": "2013-07-19",
+        "label": "2012-2013",
+        "startDate": "2012-09-10"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2012-12-21",
+          "key": "term1",
+          "startDate": "2012-09-10"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2013-03-22",
+          "key": "term2",
+          "startDate": "2013-01-14"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2013-07-19",
+          "key": "term3",
+          "startDate": "2013-04-08"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2012-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-03-29",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-04-01",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2013-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "T6U7V8W9X0g",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2012",
+        "description": "2011/12 Academic year",
+        "endDate": "2012-07-20",
+        "label": "2011-2012",
+        "startDate": "2011-09-12"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2011-12-16",
+          "key": "term1",
+          "startDate": "2011-09-12"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2012-03-30",
+          "key": "term2",
+          "startDate": "2012-01-09"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2012-07-20",
+          "key": "term3",
+          "startDate": "2012-04-16"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2011-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-04-06",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-04-09",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2012-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "Y1Z2A3B4C5h",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    },
+    {
+      "academicYear": {
+        "code": "2011",
+        "description": "2010/11 Academic year",
+        "endDate": "2011-07-22",
+        "label": "2010-2011",
+        "startDate": "2010-09-13"
+      },
+      "classPeriods": [
+        {
+          "description": "Term 1",
+          "endDate": "2010-12-17",
+          "key": "term1",
+          "startDate": "2010-09-13"
+        },
+        {
+          "description": "Term 2",
+          "endDate": "2011-04-08",
+          "key": "term2",
+          "startDate": "2011-01-10"
+        },
+        {
+          "description": "Term 3",
+          "endDate": "2011-07-22",
+          "key": "term3",
+          "startDate": "2011-04-25"
+        }
+      ],
+      "holidays": [
+        {
+          "date": "2010-10-15",
+          "event": "Mother's Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2010-12-25",
+          "event": "Christmas Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2010-12-26",
+          "event": "Boxing Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-01-01",
+          "event": "New Year",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-01-15",
+          "event": "John Chilembwe Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-03-03",
+          "event": "Martyrs Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-04-22",
+          "event": "Good Friday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-04-25",
+          "event": "Easter Monday",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-05-01",
+          "event": "Labour Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-05-14",
+          "event": "Kamuzu Day",
+          "type": "public_holiday"
+        },
+        {
+          "date": "2011-07-06",
+          "event": "Independence Day",
+          "type": "public_holiday"
+        }
+      ],
+      "id": "D6E7F8G9H0i",
+      "weekDays": {
+        "friday": true,
+        "monday": true,
+        "saturday": false,
+        "sunday": false,
+        "thursday": true,
+        "tuesday": true,
+        "wednesday": true
+      }
+    }
+  ]
+}
