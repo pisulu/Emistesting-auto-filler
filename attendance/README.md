@@ -5,9 +5,12 @@ with `present` / `absent` for every school day, using the **Attendance** sheet o
 General setup, tester selection and common options are in the [root README](../README.md).
 
 ```
-cd usage-example
-python ../fill_attendance.py --data-dir ../../sample-data --tester 1
+python attendance/fill_attendance.py --tester 1
 ```
+
+Downloaded attendance templates go in `attendance/templates/`; results are written to `attendance/output/`.
+Only the Standard 1 template is included as an example: for other standards press Enter after saving the
+downloaded template, or type `s` to skip. `--report-only` shows the change reports for every standard without templates.
 
 ## Extra option
 

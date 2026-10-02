@@ -7,8 +7,6 @@ workbooks (`SEMIS_Test_Tester_<n>.xlsx`) and the school calendar.
 |---|---|---|
 | [`attendance/`](attendance/README.md) | Learner attendance (`present` / `absent`) | `fill_attendance.py` |
 | [`performance/`](performance/README.md) | Term scores per subject (grade level and term remark fill themselves) | `fill_performance.py` |
-| `sample-data/` | Dummy tester workbook and calendar used by the examples | |
-| `semis_common.py` | Code shared by both scripts (calendar, tester selection, prompts) | |
 
 Both scripts work the same way. For each standard (and academic year) in the test data they:
 
@@ -26,6 +24,25 @@ Both scripts work the same way. For each standard (and academic year) in the tes
 ========================================================================
 ```
 
+## Where things go
+
+```
+calendar.json                      shared: school calendar
+SEMIS_Test_Tester_1.xlsx ... _5    shared: one workbook per tester (used by both attendance and performance)
+semis_common.py                    shared code
+attendance/
+    templates/                     put the downloaded attendance templates here
+    output/                        filled templates and reports are written here
+performance/
+    templates/                     put the downloaded performance templates here
+    output/
+```
+
+The calendar and the tester workbooks sit in the **repo root** because both scripts use them: attendance reads
+the **Attendance** sheet, performance reads the **Marks** sheet. Add `SEMIS_Test_Tester_2.xlsx`, `_3`, ... next to
+the first one. The repo already contains Tester 1 and a Standard 1 template for each script as an example, with the
+results in `output/`.
+
 ## Requirements
 
 - Python 3.9+
@@ -33,24 +50,12 @@ Both scripts work the same way. For each standard (and academic year) in the tes
 
 ## Running
 
-Run a script **from the folder that holds your data**; it looks for everything in the current folder
-(or use `--data-dir` and `--templates`). The bundled examples:
+From anywhere (the paths above are the defaults):
 
 ```
-cd attendance/usage-example
-python ../fill_attendance.py --data-dir ../../sample-data
-
-cd performance/usage-example
-python ../fill_performance.py --data-dir ../../sample-data
+python attendance/fill_attendance.py
+python performance/fill_performance.py
 ```
-
-## Your data folder
-
-| File | Purpose |
-|---|---|
-| `SEMIS_Test_Tester_<n>.xlsx` | One per tester. Attendance reads the **Attendance** sheet, performance reads the **Marks** sheet; both can use the **Enrolment plan** sheet. |
-| `calendar.json` (or `calendar script.json`) | The school calendar export (format below). Looked up in `--data-dir`, then the current folder. |
-| the downloaded template(s) | `SEMIS - Learners Attendance - ... .xlsx` or `SEMIS - Learners Performance - ... .xlsx`. Several can sit in one folder; each is matched to the right standard and year. |
 
 ### Calendar format
 
@@ -68,9 +73,9 @@ The opening and closing dates shown are the first term start and last term end.
 Each tester has their own workbook, so the scripts ask which to use when more than one is present:
 
 ```
-python fill_attendance.py                 # asks: 1, 1,3 or all
-python fill_attendance.py --tester 2      # Tester 2 only
-python fill_attendance.py --tester all    # every tester into the same templates
+python attendance/fill_attendance.py                 # asks: 1, 1,3 or all
+python attendance/fill_attendance.py --tester 2      # Tester 2 only
+python attendance/fill_attendance.py --tester all    # every tester into the same templates
 ```
 
 `--tester all` is the one to use when a downloaded class template contains learners from several testers:
@@ -82,10 +87,10 @@ workbooks are left blank and listed in the report.
 | Option | Meaning |
 |---|---|
 | `--tester` | `1`, `1,3` or `all` (asked if omitted and several workbooks exist) |
-| `--templates DIR` | Where the downloaded templates are (default: current folder) |
-| `--data-dir DIR` | Where the tester workbooks are (default: current folder) |
-| `--calendar FILE` | Calendar JSON |
-| `--out DIR` | Output folder (default: `./output`); results go in `output/<Tester 1 \| Testers 1,3 \| All testers>/` |
+| `--data-dir DIR` | Folder with `calendar.json` and the tester workbooks (default: repo root) |
+| `--templates DIR` | Where the downloaded templates are (default: `<module>/templates`) |
+| `--out DIR` | Output folder (default: `<module>/output`); results go in `<out>/<Tester 1 \| Testers 1,3 \| All testers>/` |
+| `--calendar FILE` | Calendar JSON (default: `calendar.json` in `--data-dir`) |
 | `--start-standard N` | Begin at Standard N |
 | `--yes` | Never prompt; skip standards whose template is missing |
 
@@ -93,5 +98,5 @@ Test workbooks and downloaded templates are never modified: filled copies are wr
 
 ## Notes
 
-- The usage examples use dummy test data.
+- The data in this repo is dummy test data.
 - Anything that did not match is listed in the **Issues and notes** sheet of the report.

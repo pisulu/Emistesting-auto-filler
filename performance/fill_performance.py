@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Guided term-performance (marks) filler for the SEMIS lifecycle test.
 
-Run it from the folder that holds your data (tester workbooks, calendar, templates),
-or point to them with --data-dir / --templates.
+Shared data (calendar.json, SEMIS_Test_Tester_<n>.xlsx) is read from the repo root, downloaded templates
+from performance/templates/ and results go to performance/output/ (override with --data-dir / --templates / --out).
 
 For each standard (and academic year) in the tester's test data the script:
   1. tells you what to download from SEMIS (standard, year, start and closing date from the calendar),
@@ -413,7 +413,7 @@ def process_job(job, all_jobs, cal, args, subject_map, out_dir, out_root):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    add_common_args(ap)
+    add_common_args(ap, Path(__file__).resolve().parent)
     ap.add_argument("--subject-map", help="JSON file {SEMIS subject: [test-data subjects]} overriding the defaults")
     args = ap.parse_args()
     calendars, available, picked, out_root, out_dir = prepare(args)

@@ -9,7 +9,8 @@ from pathlib import Path
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
-WORK = Path.cwd()   # everything is looked up in the folder you run a script from
+REPO = Path(__file__).resolve().parent   # shared data lives here: calendar.json, SEMIS_Test_Tester_<n>.xlsx
+WORK = Path.cwd()
 CALENDAR_NAMES = ("calendar.json", "calendar script.json")
 WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 SKIP_SHEETS = {"Validation", "Metadata"}
@@ -131,13 +132,17 @@ def choose_testers(available, wanted):
     return picked
 
 
-def add_common_args(ap):
-    ap.add_argument("--data-dir", default=WORK, help="folder with SEMIS_Test_Tester_<n>.xlsx files")
+def add_common_args(ap, module_dir):
+    """module_dir: the attendance/ or performance/ folder (templates/ and output/ live there)."""
+    module_dir = Path(module_dir)
+    ap.add_argument("--data-dir", default=REPO, help="folder with calendar.json and the "
+                    "SEMIS_Test_Tester_<n>.xlsx files (default: the repo root)")
     ap.add_argument("--tester", help="tester number(s): 1, 1,3 or all (asked if omitted)")
-    ap.add_argument("--calendar", help="school calendar JSON (default: calendar.json or "
-                    "'calendar script.json' in --data-dir, then the current folder)")
-    ap.add_argument("--templates", default=WORK, help="folder holding the downloaded templates")
-    ap.add_argument("--out", default=WORK / "output", help="folder for filled templates and reports")
+    ap.add_argument("--calendar", help="school calendar JSON (default: calendar.json in --data-dir)")
+    ap.add_argument("--templates", default=module_dir / "templates",
+                    help="folder holding the downloaded templates (default: <module>/templates)")
+    ap.add_argument("--out", default=module_dir / "output",
+                    help="folder for filled templates and reports (default: <module>/output)")
     ap.add_argument("--start-standard", type=int, default=1)
     ap.add_argument("--yes", action="store_true", help="do not ask; skip missing templates")
 

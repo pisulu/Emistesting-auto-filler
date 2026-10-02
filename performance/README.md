@@ -5,9 +5,12 @@ with the term scores from the **Marks** sheet of each tester workbook.
 General setup, tester selection and common options are in the [root README](../README.md).
 
 ```
-cd usage-example
-python ../fill_performance.py --data-dir ../../sample-data --tester 1
+python performance/fill_performance.py --tester 1
 ```
+
+Downloaded performance templates go in `performance/templates/`; results are written to `performance/output/`.
+Only the Standard 1 template is included as an example: for other standards press Enter after saving the
+downloaded template, or type `s` to skip.
 
 ## How the template works
 

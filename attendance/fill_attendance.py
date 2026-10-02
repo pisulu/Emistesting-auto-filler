@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Guided bulk-attendance filler for the SEMIS lifecycle test.
 
-Run it from the folder that holds your data (tester workbooks, calendar, templates),
-or point to them with --data-dir / --templates.
+Shared data (calendar.json, SEMIS_Test_Tester_<n>.xlsx) is read from the repo root, downloaded templates
+from attendance/templates/ and results go to attendance/output/ (override with --data-dir / --templates / --out).
 
 For each standard (and academic year) in the tester's test data the script:
   1. tells you what to download from SEMIS (standard, year, start and closing date
@@ -411,7 +411,7 @@ def process_job(job, cal, args, classes, all_records, out_dir, out_root):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    add_common_args(ap)
+    add_common_args(ap, Path(__file__).resolve().parent)
     ap.add_argument("--report-only", action="store_true", help="only build change reports")
     args = ap.parse_args()
     calendars, available, picked, out_root, out_dir = prepare(args)
